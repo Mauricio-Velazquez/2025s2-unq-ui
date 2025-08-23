@@ -1,0 +1,30 @@
+{
+  "name": "instagram-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/main.js",
+    "dev": "node --watch src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elgame3215/instagram-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elgame3215/instagram-api/issues"
+  },
+  "homepage": "https://github.com/elgame3215/instagram-api#readme",
+  "dependencies": {
+    "@unq-ui/instagram-model-js": "^1.0.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
+  }
+}
