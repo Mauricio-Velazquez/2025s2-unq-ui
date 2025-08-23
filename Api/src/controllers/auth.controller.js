@@ -1,7 +1,6 @@
 export class AuthController {
-  constructor (system, userValidator) {
+  constructor (system) {
     this.system = system
-    this.userValidator = userValidator
   }
 
   register = (req, res) => {
