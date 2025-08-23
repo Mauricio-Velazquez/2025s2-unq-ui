@@ -22,7 +22,8 @@
   "homepage": "https://github.com/elgame3215/instagram-api#readme",
   "dependencies": {
     "@unq-ui/instagram-model-js": "^1.0.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "standard": "^17.1.2"
