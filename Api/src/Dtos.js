@@ -3,14 +3,14 @@ export const transformUser = ({ id, email, password, image, followers }) => ({
   email,
   password,
   image,
-  followers: followers.map((follower) => transformUserSimple(follower)),
-});
+  followers: followers.map((follower) => transformUserSimple(follower))
+})
 
 export const transformUserSimple = (user) => ({
   id: user.id,
   name: user.name,
-  image: user.image,
-});
+  image: user.image
+})
 
 export const transformPost = ({
   id,
@@ -19,7 +19,7 @@ export const transformPost = ({
   user,
   date,
   comments,
-  likes,
+  likes
 }) => ({
   id,
   description,
@@ -29,7 +29,7 @@ export const transformPost = ({
   commets: comments.map((comment) => ({
     id: comment.id,
     body: comment.body,
-    user: transformUserSimple(comment.user),
+    user: transformUserSimple(comment.user)
   })),
-  likes: likes.map((user) => transformUserSimple(user)),
-});
+  likes: likes.map((user) => transformUserSimple(user))
+})
