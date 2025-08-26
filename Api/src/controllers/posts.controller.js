@@ -1,4 +1,5 @@
 import { transformPost } from '../utils/Dtos.js'
+import { postBodySchema } from '../schemas/schemas.js'
 
 class PostsController {
   constructor (system, tokenController) {
@@ -13,7 +14,18 @@ class PostsController {
 
       res.json(transformPost(post))
     } catch (error) {
-      res.status(404).send('Post not found')
+      res.status(404).json('Post not found')
+    }
+  }
+
+  createPost = (req, res) => {
+    try {
+      const draftPost = postBodySchema.cast(req.body)
+      const createdPost = this.system.addPost(req.user.id, draftPost)
+
+      return res.status(201).json(createdPost)
+    } catch (error) {
+      res.status(404).json({ message: error.message })
     }
   }
 }

@@ -6,3 +6,8 @@ export const putPostBodySchema = object({
 })
   .noUnknown(true)
   .strict()
+
+export const postBodySchema = object({
+  image: string().url().trim().required(),
+  description: string().required()
+})
