@@ -5,7 +5,6 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
     "start": "node src/index.js",
     "dev": "node --watch src/index.js"
   },
