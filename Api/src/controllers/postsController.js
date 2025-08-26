@@ -37,16 +37,16 @@ class PostsController {
       const post = this.system.getPost(id)
 
       if (post.user.id !== req.user.id) {
-        res.status(403).send("Forbidden (User is not the owner of the post)")
+        res.status(403).send('Forbidden (User is not the owner of the post)')
         return
       }
 
       const updatedPost = this.system.editPost(id, draftPost)
       res.json(transformPost(updatedPost))
     } catch (error) {
-      res.status(404).send("Post not found")
+      res.status(404).send('Post not found')
     }
-  };
+  }
 }
 
 export default PostsController
