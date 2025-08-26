@@ -2,12 +2,12 @@
   "name": "instagram-api",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "jest",
-    "start": "node src/main.js",
-    "dev": "node --watch src/main.js"
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "dependencies": {
     "@unq-ui/instagram-model-js": "^1.0.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "yup": "^1.7.0"
   },
   "devDependencies": {
