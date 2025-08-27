@@ -9,7 +9,6 @@ import TokenController from './controllers/token.controller.js'
 const system = getInstagramSystem()
 const tokenController = new TokenController(system)
 const postsController = new PostsController(system, tokenController)
-
 const app = express()
 const port = 7070
 

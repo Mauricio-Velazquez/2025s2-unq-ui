@@ -1,8 +1,4 @@
 import { transformPost } from '../utils/Dtos.js'
-<<<<<<< HEAD
-import { postBodySchema } from '../schemas/schemas.js'
-=======
->>>>>>> 8371 (delego la validacion y casteo del body al middleware checkBody en las rutas de post)
 
 class PostsController {
   constructor (system, tokenController) {
@@ -45,6 +41,33 @@ class PostsController {
       res.json(transformPost(updatedPost))
     } catch (error) {
       res.status(404).json({ message: 'Post not found' })
+    }
+  }
+
+  toggleLike = async (req, res) => {
+    try {
+      const { postId } = req.params
+      const userId = req.user.id
+
+      const post = this.system.updateLike(postId, userId)
+
+      return res.status(200).json(transformPost(post))
+    } catch (error) {
+      return res.status(404).json({ message: error.message })
+    }
+  }
+
+  addComment = async (req, res) => {
+    try {
+      const { postId } = req.params
+      const userId = req.user.id
+      const comment = req.body
+
+      const post = this.system.addComment(postId, userId, comment)
+
+      return res.status(200).json(transformPost(post))
+    } catch (error) {
+      return res.status(404).json({ message: error.message })
     }
   }
 }
