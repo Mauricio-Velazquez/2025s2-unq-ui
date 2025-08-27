@@ -12,6 +12,8 @@ const createPostsRouter = (postsController, tokenController) => {
     postsController.getPost
   )
 
+  postsRouter.put('/:postId', tokenController.checkRole(ROLES.USER), postsController.editPost)
+
   return postsRouter
 }
 
