@@ -1,8 +1,8 @@
 export function checkBody (schema) {
   return (req, res, next) => {
     try {
+      schema.validateSync(req.body)
       const body = schema.cast(req.body)
-      schema.validateSync(body)
       req.body = body
       return next()
     } catch (error) {

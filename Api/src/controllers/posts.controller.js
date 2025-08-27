@@ -1,5 +1,8 @@
 import { transformPost } from '../utils/Dtos.js'
+<<<<<<< HEAD
 import { postBodySchema } from '../schemas/schemas.js'
+=======
+>>>>>>> 8371 (delego la validacion y casteo del body al middleware checkBody en las rutas de post)
 
 class PostsController {
   constructor (system, tokenController) {
@@ -20,8 +23,7 @@ class PostsController {
 
   createPost = (req, res) => {
     try {
-      const draftPost = postBodySchema.cast(req.body)
-      const createdPost = this.system.addPost(req.user.id, draftPost)
+      const createdPost = this.system.addPost(req.user.id, req.body)
 
       return res.status(201).json(transformPost(createdPost))
     } catch (error) {
@@ -31,8 +33,6 @@ class PostsController {
 
   editPost = async (req, res) => {
     try {
-      const draftPost = await postBodySchema.validate(req.body)
-
       const id = req.params.postId
       const post = this.system.getPost(id)
 
@@ -41,10 +41,10 @@ class PostsController {
         return
       }
 
-      const updatedPost = this.system.editPost(id, draftPost)
+      const updatedPost = this.system.editPost(id, req.body)
       res.json(transformPost(updatedPost))
     } catch (error) {
-      res.status(404).json({ message: error.message })
+      res.status(404).json({ message: 'Post not found' })
     }
   }
 }
