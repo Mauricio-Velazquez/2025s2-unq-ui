@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
-
-const JWT_SECRET = 'jwt_secret_key'
+import { JWT_SECRET } from '../config/constants.js'
 
 class TokenController {
   constructor (service) {

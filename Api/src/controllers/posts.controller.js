@@ -23,7 +23,26 @@ class PostsController {
       const draftPost = postBodySchema.cast(req.body)
       const createdPost = this.system.addPost(req.user.id, draftPost)
 
-      return res.status(201).json(createdPost)
+      return res.status(201).json(transformPost(createdPost))
+    } catch (error) {
+      res.status(404).json({ message: error.message })
+    }
+  }
+
+  editPost = async (req, res) => {
+    try {
+      const draftPost = await postBodySchema.validate(req.body)
+
+      const id = req.params.postId
+      const post = this.system.getPost(id)
+
+      if (post.user.id !== req.user.id) {
+        res.status(403).json({ message: 'Forbidden (User is not the owner of the post)' })
+        return
+      }
+
+      const updatedPost = this.system.editPost(id, draftPost)
+      res.json(transformPost(updatedPost))
     } catch (error) {
       res.status(404).json({ message: error.message })
     }
