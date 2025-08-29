@@ -1,5 +1,4 @@
 import { transformPost } from '../utils/Dtos.js'
-import { postBodySchema, putPostBodySchema } from '../schemas/schemas.js'
 
 class PostsController {
   constructor (system, tokenController) {
@@ -14,37 +13,76 @@ class PostsController {
 
       res.json(transformPost(post))
     } catch (error) {
-      res.status(404).send('Post not found')
+      res.status(404).json('Post not found')
     }
   }
 
   createPost = (req, res) => {
     try {
-      const draftPost = postBodySchema.cast(req.body)
-      const createdPost = this.system.addPost(req.user.id, draftPost)
+      const createdPost = this.system.addPost(req.user.id, req.body)
 
-      return res.status(201).json(createdPost)
+      return res.status(201).json(transformPost(createdPost))
     } catch (error) {
-
+      res.status(404).json({ message: error.message })
     }
   }
 
   editPost = async (req, res) => {
     try {
-      const draftPost = await putPostBodySchema.validate(req.body)
-
       const id = req.params.postId
       const post = this.system.getPost(id)
 
       if (post.user.id !== req.user.id) {
-        res.status(403).send('Forbidden (User is not the owner of the post)')
+        res.status(403).json({ message: 'Forbidden (User is not the owner of the post)' })
         return
       }
 
-      const updatedPost = this.system.editPost(id, draftPost)
+      const updatedPost = this.system.editPost(id, req.body)
       res.json(transformPost(updatedPost))
     } catch (error) {
-      res.status(404).send('Post not found')
+      res.status(404).json({ message: 'Post not found' })
+    }
+  }
+
+  deletePost = (req, res) => {
+    try {
+      const id = req.params.postId
+      const post = this.system.getPost(id)
+
+      if (post.user.id !== req.user.id) {
+        res.status(403).json({ message: 'Forbidden (User is not the owner of the post)' })
+        return
+      }
+      res.status(204).send('No Content')
+    } catch (error) {
+      res.status(404).json({ message: 'Post not found' })
+    }
+  }
+
+  toggleLike = async (req, res) => {
+    try {
+      const { postId } = req.params
+      const userId = req.user.id
+
+      const post = this.system.updateLike(postId, userId)
+
+      return res.status(200).json(transformPost(post))
+    } catch (error) {
+      return res.status(404).json({ message: error.message })
+    }
+  }
+
+  addComment = async (req, res) => {
+    try {
+      const { postId } = req.params
+      const userId = req.user.id
+      const comment = req.body
+
+      const post = this.system.addComment(postId, userId, comment)
+
+      return res.status(200).json(transformPost(post))
+    } catch (error) {
+      return res.status(404).json({ message: error.message })
     }
   }
 }

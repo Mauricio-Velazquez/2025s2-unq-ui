@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
-
-const JWT_SECRET = 'jwt_secret_key'
+import { JWT_SECRET, ROLES } from '../config/constants.js'
 
 class TokenController {
   constructor (service) {
@@ -14,11 +13,11 @@ class TokenController {
 
   checkRole = (role) => {
     return (req, res, next) => {
-      if (role === 'public') {
+      if (role === ROLES.PUBLIC) {
         next()
         return
       }
-      if (role === 'admin' || role === 'user') {
+      if (role === ROLES.ADMIN || role === ROLES.USER) {
         const authHeader = req.headers.authorization
         if (!authHeader) {
           res.status(401).json({ error: 'Authorization header is required' })
@@ -27,6 +26,7 @@ class TokenController {
         try {
           const decoded = this.validateToken(authHeader)
           const user = this.service.getUser(decoded.userId)
+
           req.user = user
           next()
         } catch (error) {

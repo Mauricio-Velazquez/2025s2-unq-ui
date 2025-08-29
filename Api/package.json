@@ -1,7 +1,6 @@
 {
   "name": "instagram-api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -19,6 +18,7 @@
     "url": "https://github.com/elgame3215/instagram-api/issues"
   },
   "homepage": "https://github.com/elgame3215/instagram-api#readme",
+  "description": "",
   "dependencies": {
     "@unq-ui/instagram-model-js": "^1.0.0",
     "express": "^5.1.0",

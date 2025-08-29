@@ -2,13 +2,12 @@ import getInstagramSystem from '@unq-ui/instagram-model-js'
 import express from 'express'
 import createPostsRouter from './routers/posts.routes.js'
 import PostsController from './controllers/posts.controller.js'
-import TokenController from './controllers/token.controller.js'
 import { authRouter } from './routers/auth.routes.js'
+import TokenController from './controllers/token.controller.js'
 
 const system = getInstagramSystem()
 const tokenController = new TokenController(system)
 const postsController = new PostsController(system, tokenController)
-
 const app = express()
 const port = 7070
 
