@@ -20,7 +20,7 @@
   "homepage": "https://github.com/elgame3215/instagram-api#readme",
   "description": "",
   "dependencies": {
-    "@unq-ui/instagram-model-js": "^1.0.0",
+    "@unq-ui/instagram-model-js": "^1.0.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "yup": "^1.7.0"
