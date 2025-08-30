@@ -5,13 +5,13 @@ import createPostsRouter from './routers/posts.routes.js'
 import PostsController from './controllers/posts.controller.js'
 import { authRouter } from './routers/auth.routes.js'
 import TokenController from './controllers/token.controller.js'
-import createUserRouter from "./routers/userRouter.js";
-import UserController from "./controllers/userController.js";
+import createUserRouter from './routers/user.routes.js'
+import UserController from './controllers/user.controller.js'
 
 const system = getInstagramSystem()
 const tokenController = new TokenController(system)
 const postsController = new PostsController(system, tokenController)
-const userController = new UserController(system);
+const userController = new UserController(system)
 const app = express()
 const port = 7070
 
@@ -21,8 +21,8 @@ app.use(express.json())
 app.use('/search', searchRouter)
 app.use('/posts', createPostsRouter(postsController, tokenController))
 app.use('/', authRouter)
-app.use("/user", createUserRouter(userController, tokenController));
-app.use("/users", createUserRouter(userController, tokenController));
+app.use('/user', createUserRouter(userController, tokenController))
+app.use('/users', createUserRouter(userController, tokenController))
 
 app.use((err, req, res, next) => {
   if (err.constructor === Error) {
@@ -37,5 +37,3 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
-
-console.log(system.users)
