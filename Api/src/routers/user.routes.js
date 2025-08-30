@@ -1,7 +1,7 @@
-import express from 'express'
+import { Router } from 'express'
 
 const createUserRouter = (userController, tokenController) => {
-  const userRouter = express.Router()
+  const userRouter = Router()
 
   userRouter.get('/', tokenController.checkRole('user'), userController.getUserTimeline)
   userRouter.get('/:userId', userController.getUser)
