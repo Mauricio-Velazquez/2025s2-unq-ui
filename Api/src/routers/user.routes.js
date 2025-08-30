@@ -5,7 +5,7 @@ const createUserRouter = (userController, tokenController) => {
 
   userRouter.get('/', tokenController.checkRole('user'), userController.getUserTimeline)
   userRouter.get('/:userId', userController.getUser)
-  userRouter.put('/:userId/follow', tokenController.checkRole('user'), userController.putUserFollow)
+  userRouter.put('/:userId/follow', tokenController.checkRole('user'), userController.updateUserFollow)
 
   return userRouter
 }

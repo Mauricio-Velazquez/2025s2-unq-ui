@@ -1,4 +1,4 @@
-import { transformUserPosts, transformUserTimeline } from '../utils/Dtos.js'
+import { transformUser, transformUserPosts, transformUserTimeline } from '../utils/Dtos.js'
 
 class UserController {
   constructor (system) {
@@ -28,39 +28,20 @@ class UserController {
     }
   }
 
-  putUserFollow = (req, res) => {
+  updateUserFollow = (req, res) => {
     const { userId } = req.params
     const loggedUserId = req.user.id
 
     if (userId === loggedUserId) {
-      return res.status(400).json({ error: "Can't add yourself as a friend" })
+      return res.status(400).json({ message: 'Can\'t add yourself as a friend' })
     }
-
-    let targetUser
-    let loggedUser
 
     try {
-      targetUser = this.system.getUser(userId)
-      loggedUser = this.system.getUser(loggedUserId)
+      const user = this.system.updateFollower(loggedUserId, userId)
+      return res.status(200).json(transformUser(user))
     } catch (error) {
-      return res.status(404).json({ error: 'Not found' })
+      return res.status(404).json({ message: 'User not found' })
     }
-
-    const alreadyFollower = targetUser.followers.some(f => f.id === loggedUser.id)
-
-    if (alreadyFollower) {
-      targetUser.followers = targetUser.followers.filter(f => f.id !== loggedUser.id)
-    } else {
-      targetUser.followers.push({
-        id: loggedUser.id,
-        name: loggedUser.name,
-        image: loggedUser.image
-      })
-    }
-
-    const posts = this.system.getPostByUserId(userId)
-
-    res.json(transformUserPosts({ ...targetUser, posts }))
   }
 }
 
