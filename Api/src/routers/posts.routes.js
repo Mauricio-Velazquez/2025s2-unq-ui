@@ -6,7 +6,7 @@ import { commentBodySchema, postBodySchema } from '../schemas/post.schemas.js'
 const createPostsRouter = (postsController, tokenController) => {
   const postsRouter = express.Router()
 
-  postsRouter.post('/', tokenController.checkRole(ROLES.USER), postsController.createPost)
+  postsRouter.post('/', checkBody(postBodySchema), tokenController.checkRole(ROLES.USER), postsController.createPost)
 
   postsRouter.get(
     '/:postId',
