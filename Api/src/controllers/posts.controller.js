@@ -27,7 +27,7 @@ class PostsController {
     }
   }
 
-  editPost = async (req, res) => {
+  editPost = (req, res) => {
     try {
       const id = req.params.postId
       const post = this.system.getPost(id)
