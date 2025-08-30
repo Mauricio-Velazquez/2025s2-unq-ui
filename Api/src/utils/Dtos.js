@@ -49,38 +49,38 @@ export const transformUserPosts = ({
   followers: (followers || []).map((follower) => ({
     id: follower.id,
     name: follower.name,
-    image: follower.image,
+    image: follower.image
   })),
   posts: (posts || []).map((post) => ({
     id: post.id,
     description: post.description,
     image: post.image,
     user: post.user
-        ? {
+      ? {
           id: post.user.id,
           name: post.user.name,
-          image: post.user.image,
+          image: post.user.image
         }
-        : null,
+      : null,
     date: post.date,
     comments: (post.comments || []).map((comment) => ({
       id: comment.id,
       body: comment.body,
       user: comment.user
-          ? {
+        ? {
             id: comment.user.id,
             name: comment.user.name,
-            image: comment.user.image,
+            image: comment.user.image
           }
-          : null,
+        : null
     })),
     likes: (post.likes || []).map((like) => ({
       id: like.id,
       name: like.name,
-      image: like.image,
-    })),
-  })),
-});
+      image: like.image
+    }))
+  }))
+})
 
 export const transformUserTimeline = ({
   id,
@@ -104,23 +104,23 @@ export const transformUserTimeline = ({
     description: post.description,
     image: post.image,
     user: post.user
-        ? {
+      ? {
           id: post.user.id,
           name: post.user.name,
           image: post.user.image
         }
-        : null,
+      : null,
     date: post.date,
     comments: (post.comments || []).map(c => ({
       id: c.id,
       body: c.body,
       user: c.user
-          ? {
+        ? {
             id: c.user.id,
             name: c.user.name,
             image: c.user.image
           }
-          : null
+        : null
     })),
     likes: (post.likes || []).map(like => ({
       id: like.id,
@@ -128,4 +128,4 @@ export const transformUserTimeline = ({
       image: like.image
     }))
   }))
-});
+})
