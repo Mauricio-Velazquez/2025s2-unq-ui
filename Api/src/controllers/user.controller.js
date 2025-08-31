@@ -38,7 +38,9 @@ class UserController {
 
     try {
       const user = this.system.updateFollower(loggedUserId, userId)
-      return res.status(200).json(transformUser(user))
+      const posts = this.system.getPostByUserId(userId)
+      const userDto = transformUserPosts({ ...user, posts })
+      return res.status(200).json(userDto)
     } catch (error) {
       return res.status(404).json({ message: 'User not found' })
     }
