@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@unq-ui/instagram-model-js": "^1.0.2",
+    "express": "^5.1.0"
+  }
+}
