@@ -24,7 +24,7 @@ class UserController {
 
       res.json(userDto)
     } catch (error) {
-      res.status(404).send(`Usuario ${req.params.userId} no encontrado`)
+      res.status(404).json({ message: `Usuario ${req.params.userId} no encontrado` })
     }
   }
 

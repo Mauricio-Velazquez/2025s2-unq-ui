@@ -13,7 +13,7 @@ class PostsController {
 
       res.json(transformPost(post))
     } catch (error) {
-      res.status(404).json('Post not found')
+      res.status(404).json({ message: 'Post not found' })
     }
   }
 
@@ -53,7 +53,7 @@ class PostsController {
         res.status(403).json({ message: 'Forbidden (User is not the owner of the post)' })
         return
       }
-      res.status(204).send('No Content')
+      res.status(204).send()
     } catch (error) {
       res.status(404).json({ message: 'Post not found' })
     }
