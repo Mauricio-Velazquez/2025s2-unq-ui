@@ -3,7 +3,7 @@ export const transformUser = ({ id, email, password, image, followers }) => ({
   email,
   password,
   image,
-  followers: followers.map((follower) => transformUserSimple(follower))
+  following: followers.map((follower) => transformUserSimple(follower))
 })
 
 export const transformUserSimple = (user) => ({
@@ -42,7 +42,7 @@ export const transformUserPosts = ({
   email,
   name,
   image,
-  followers: (followers || []).map(transformUserSimple),
+  following: (followers || []).map(transformUserSimple),
   posts: (posts || []).map(transformPost)
 })
 
@@ -58,7 +58,7 @@ export const transformUserTimeline = ({
   email,
   name,
   image,
-  followers: (followers || []).map(transformUserSimple),
+  following: (followers || []).map(transformUserSimple),
   timeline: (timeline || []).map(transformPost)
 })
 
