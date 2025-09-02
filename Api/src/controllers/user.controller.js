@@ -38,7 +38,7 @@ class UserController {
 
     try {
       const user = this.system.updateFollower(loggedUserId, userId)
-      const posts = this.system.getPostByUserId(userId)
+      const posts = this.system.getPostByUserId(loggedUserId)
       const userDto = transformUserPosts({ ...user, posts })
       return res.status(200).json(userDto)
     } catch (error) {
