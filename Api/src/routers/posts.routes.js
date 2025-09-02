@@ -19,6 +19,8 @@ const createPostsRouter = (postsController, tokenController) => {
 
   postsRouter.post('/:postId/comment', checkBody(commentBodySchema), tokenController.checkRole(ROLES.USER), postsController.addComment)
 
+  postsRouter.delete('/:postId', tokenController.checkRole(ROLES.USER), postsController.deletePost)
+
   return postsRouter
 }
 

@@ -1,4 +1,5 @@
 import { HEADER as AUTH_HEADER } from '../config/constants.js'
+import { transformUser } from '../utils/Dtos.js'
 import TokenController from './token.controller.js'
 
 const tokenController = new TokenController()
@@ -30,7 +31,7 @@ export class AuthController {
       const token = tokenController.generateToken(user.id)
 
       res.set(AUTH_HEADER, token)
-      return res.status(200).json(user)
+      return res.status(200).json(transformUser(user))
     } catch (error) {
       return res.status(400).json({ message: error.message })
     }

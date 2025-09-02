@@ -44,6 +44,21 @@ class PostsController {
     }
   }
 
+  deletePost = (req, res) => {
+    try {
+      const id = req.params.postId
+      const post = this.system.getPost(id)
+
+      if (post.user.id !== req.user.id) {
+        res.status(403).json({ message: 'Forbidden (User is not the owner of the post)' })
+        return
+      }
+      res.status(204).send('No Content')
+    } catch (error) {
+      res.status(404).json({ message: 'Post not found' })
+    }
+  }
+
   toggleLike = async (req, res) => {
     try {
       const { postId } = req.params
