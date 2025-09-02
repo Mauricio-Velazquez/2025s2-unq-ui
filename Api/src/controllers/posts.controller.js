@@ -46,13 +46,16 @@ class PostsController {
 
   deletePost = (req, res) => {
     try {
-      const id = req.params.postId
-      const post = this.system.getPost(id)
+      const { postId } = req.params
+      const post = this.system.getPost(postId)
 
       if (post.user.id !== req.user.id) {
         res.status(403).json({ message: 'Forbidden (User is not the owner of the post)' })
         return
       }
+
+      this.system.deletePost(postId)
+
       res.status(204).send()
     } catch (error) {
       res.status(404).json({ message: 'Post not found' })
