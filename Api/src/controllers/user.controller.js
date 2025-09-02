@@ -1,4 +1,4 @@
-import { transformUser, transformUserPosts, transformUserTimeline } from '../utils/Dtos.js'
+import { transformUserPosts, transformUserTimeline } from '../utils/Dtos.js'
 
 class UserController {
   constructor (system) {
