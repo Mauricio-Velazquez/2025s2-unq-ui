@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { JWT_SECRET, ROLES } from '../config/constants.js'
 
 class TokenController {
-  constructor (service) {
+  constructor(service) {
     this.service = service
   }
 
@@ -17,19 +17,23 @@ class TokenController {
         next()
         return
       }
+
       if (role === ROLES.ADMIN || role === ROLES.USER) {
         const authHeader = req.headers.authorization
-        if (!authHeader) {
-          res.status(401).json({ error: 'Authorization header is required' })
-          return
+        const tokenFromCookie = req.cookies?.Authorization
+        const token = authHeader || tokenFromCookie
+
+        if (!token) {
+          return res.status(401).json({ error: 'Token is required' })
         }
+
         try {
-          const decoded = this.validateToken(authHeader)
+          const decoded = this.validateToken(token)
           const user = this.service.getUser(decoded.userId)
           req.user = user
           next()
         } catch (error) {
-          res.status(401).json({ error: 'Invalid token' })
+          return res.status(401).json({ error: 'Invalid token' })
         }
       } else {
         throw new Error(`Invalid role: ${role}`)

@@ -9,5 +9,6 @@ const controller = new AuthController(instagramSystem)
 
 authRouter.post('/register', checkBody(registerSchema), controller.register)
 authRouter.post('/login', checkBody(loginSchema), controller.login)
+authRouter.post('/logout', controller.logout)
 
 export { authRouter }

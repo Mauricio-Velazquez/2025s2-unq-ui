@@ -1,0 +1,12 @@
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader__title {
+    font-size: 24px;
+    color: #555;
+}

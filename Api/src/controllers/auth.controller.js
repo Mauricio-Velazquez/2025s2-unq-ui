@@ -3,6 +3,7 @@ import { transformUser } from '../utils/Dtos.js'
 import TokenController from './token.controller.js'
 
 const tokenController = new TokenController()
+
 export class AuthController {
   constructor (system) {
     this.system = system
@@ -15,7 +16,8 @@ export class AuthController {
       const newUser = this.system.register(user)
       const token = tokenController.generateToken(newUser.id)
 
-      res.set(AUTH_HEADER, token)
+      res.setHeader(AUTH_HEADER, token)
+      res.cookie('Authorization', token, { httpOnly: true, maxAge: 1000 * 60 * 60 })
       return res.status(201).json(newUser)
     } catch (error) {
       return res.status(400).json({ message: error.message })
@@ -30,10 +32,16 @@ export class AuthController {
       const user = this.system.login(email, password)
       const token = tokenController.generateToken(user.id)
 
-      res.set(AUTH_HEADER, token)
+      res.setHeader(AUTH_HEADER, token)
+      res.cookie('Authorization', token, { httpOnly: true, maxAge: 1000 * 60 * 60 })
       return res.status(200).json(transformUser(user))
     } catch (error) {
       return res.status(400).json({ message: error.message })
     }
+  }
+
+  logout = (req, res) => {
+    res.clearCookie('Authorization')
+    return res.status(200).json({ message: 'Logged out' })
   }
 }

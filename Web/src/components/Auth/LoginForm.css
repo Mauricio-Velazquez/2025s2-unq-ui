@@ -1,0 +1,12 @@
+:root {
+  --primary-button-color: #495DF9B2;
+}
+
+.login__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 28rem;
+  align-items: center;
+  gap: 1rem;
+}

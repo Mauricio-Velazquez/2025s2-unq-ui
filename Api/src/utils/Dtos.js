@@ -26,7 +26,7 @@ export const transformPost = ({
   image,
   user: transformUserSimple(user),
   date,
-  commets: comments.map(transformComment),
+  comments: comments.map(transformComment),
   likes: likes.map((user) => transformUserSimple(user))
 })
 

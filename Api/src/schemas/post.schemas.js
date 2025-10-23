@@ -3,7 +3,7 @@ import { CONFIG } from '../config/constants.js'
 
 export const postBodySchema = object({
   image: string().url().trim().required(),
-  description: string().required()
+  description: string().required().trim()
 }).noUnknown(true).strict()
 
 export const commentBodySchema = object({

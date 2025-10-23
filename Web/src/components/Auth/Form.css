@@ -1,0 +1,55 @@
+
+.form__icon {
+  width: 13rem;
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  justify-content: center;
+  gap: .4rem;
+}
+
+.form__label {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form__input {
+  width: 100%;
+  border: .1rem solid #DDD;
+  border-radius: .3rem;
+  padding: 0.5rem;
+  background-color: #FAFAFA;
+  color: #242424;
+}
+
+.form__input:focus {
+  outline: none;
+}
+
+.form__submit {
+  width: 100%;
+  background-color: var(--primary-button-color);
+  color: #FAFAFA;
+}
+
+.form__p {
+  color: #242424;
+  text-align: center;
+  font-size: .88rem;
+  width: 100%;
+  margin: .2rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+hr {
+  width: 28rem;
+  margin: .2rem 0 0;
+  border-color: #FFF;
+}

@@ -1,28 +1,17 @@
 import express from 'express'
-import searchRouter from './routes/search.routes.js'
-import createPostsRouter from './routes/posts.routes.js'
-import PostsController from './controllers/posts.controller.js'
-import { authRouter } from './routes/auth.routes.js'
-import TokenController from './controllers/token.controller.js'
-import createUserRouter from './routes/user.routes.js'
-import UserController from './controllers/user.controller.js'
-import { instagramSystem } from './services/instagramSystem.js'
+import apiRouter from './routes/index.js'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
 
-const tokenController = new TokenController(instagramSystem)
-const postsController = new PostsController(instagramSystem, tokenController)
-const userController = new UserController(instagramSystem)
 const app = express()
 const port = 7070
-const postsRouter = createPostsRouter(postsController, tokenController)
-const usersRouter = createUserRouter(userController, tokenController)
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+app.use(cookieParser())
 
-app.use('/search', searchRouter)
-app.use('/posts', postsRouter)
-app.use('/', authRouter)
-app.use('/users', usersRouter)
+app.use('/api', apiRouter)
 
 app.use((err, req, res, next) => {
   if (err.constructor === Error) {

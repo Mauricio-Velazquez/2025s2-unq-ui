@@ -1,0 +1,8 @@
+.login__main {
+  display: flex;
+  gap: 2rem;
+}
+
+.login__img {
+  max-width: 500px;
+}

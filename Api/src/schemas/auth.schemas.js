@@ -9,5 +9,5 @@ export const registerSchema = object({
 
 export const loginSchema = object({
   email: string().email().trim().required(),
-  password: string().trim().required()
+  password: string().required()
 }).noUnknown(true).strict()
