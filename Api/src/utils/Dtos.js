@@ -1,9 +1,10 @@
-export const transformUser = ({ id, email, password, image, followers }) => ({
+export const transformUser = ({ id, email, name, image, followers, posts }) => ({
   id,
   email,
-  password,
+  name,
   image,
-  following: followers.map((follower) => transformUserSimple(follower))
+  following: followers.map((follower) => transformUserSimple(follower)),
+  posts: posts.map(transformPost)
 })
 
 export const transformUserSimple = (user) => ({
